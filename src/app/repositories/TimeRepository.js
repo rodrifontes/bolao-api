@@ -34,13 +34,18 @@ class TimeRepository {
   async update(id, {
     nome, nome_reduzido, path_escudo
   }) {
-
+    const [row] = await db.query(`
+      UPDATE times SET nome = $1, nome_reduzido = $2, path_escudo = $3
+      WHERE id = $4
+      RETURNING *;
+    `, [nome, nome_reduzido, path_escudo, id]);
+    return row;
   }
 
   async delete(id) {
-
+    const deleteOp = await db.query('DELETE FROM times WHERE id = $1;', [id]);
+    return deleteOp;
   }
-
 }
 
 module.exports = new TimeRepository();
