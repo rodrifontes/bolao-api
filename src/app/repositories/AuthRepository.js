@@ -2,7 +2,6 @@ const db = require('../../database');
 
 class AuthRepository {
   async signin(email, password) {
-    console.log(email);
     const [row] = await db.query('SELECT * FROM usuarios WHERE email = $1 AND senha = $2', [email, password]);
     return row;
   }

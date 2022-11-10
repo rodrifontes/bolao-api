@@ -1,9 +1,7 @@
 const AuthRepository = require('../repositories/AuthRepository');
 const UsuarioRepository = require('../repositories/usuarioRepository');
 const jwt = require('jsonwebtoken');
-
-const SECRET_KEY = '123456789';
-const EXPIRES_IN = '12h';
+const authConfig = require('../config/auth');
 
 class AuthController {
 
@@ -21,7 +19,7 @@ class AuthController {
     const usuario = await AuthRepository.signin(email, senha);
     if (!usuario) return response.status(401).json({ error: 'Senha incorreta!' });
 
-    const access_token = jwt.sign({ ...usuario, }, SECRET_KEY, { expiresIn: EXPIRES_IN, });
+    const access_token = jwt.sign({ ...usuario, }, authConfig.jwt.secretKey, { expiresIn: authConfig.jwt.expiresIn, });
     delete usuario.senha;
     return response.status(200).json({ access_token, usuario });
 
