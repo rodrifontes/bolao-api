@@ -13,26 +13,24 @@ const router = Router();
 router.post('/login', AuthController.singin);
 router.post('/usuarios', UsuarioController.store);
 
-router.use(isAuthenticated);
-
 router.get('/usuarios', UsuarioController.index);
 
-router.get('/times', TimeController.index);
-router.get('/times/:id', TimeController.show);
-router.delete('/times/:id', TimeController.delete);
-router.post('/times', TimeController.store);
-router.put('/times/:id', TimeController.update);
+router.get('/times', isAuthenticated, TimeController.index);
+router.get('/times/:id', isAuthenticated, TimeController.show);
+router.delete('/times/:id', isAuthenticated, TimeController.delete);
+router.post('/times', isAuthenticated, TimeController.store);
+router.put('/times/:id', isAuthenticated, TimeController.update);
 
-router.get('/campeonatos', CampeonatoController.index);
-router.get('/campeonatos/:id', CampeonatoController.show);
-router.delete('/campeonatos/:id', CampeonatoController.delete);
-router.post('/campeonatos', CampeonatoController.store);
-router.put('/campeonatos/:id', CampeonatoController.update);
+router.get('/campeonatos', isAuthenticated, CampeonatoController.index);
+router.get('/campeonatos/:id', isAuthenticated, CampeonatoController.show);
+router.delete('/campeonatos/:id', isAuthenticated, CampeonatoController.delete);
+router.post('/campeonatos', isAuthenticated, CampeonatoController.store);
+router.put('/campeonatos/:id', isAuthenticated, CampeonatoController.update);
 
-router.get('/jogos', JogoController.index);
-router.post('/jogos', JogoController.store);
+router.get('/jogos', isAuthenticated, JogoController.index);
+router.post('/jogos', isAuthenticated, JogoController.store);
 
-router.get('/fases', FaseController.index);
+router.get('/fases', isAuthenticated, FaseController.index);
 
 
 module.exports = router;
