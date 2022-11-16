@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS palpites (
   jogo_id UUID NOT NULL,
   placar_mandante INTEGER NOT NULL,
   placar_visitante INTEGER NOT NULL,
-  data TIMESTAMP NOT NULL,
+  data TIMESTAMP DEFAULT NOW() NOT NULL,
   FOREIGN KEY(usuario_id) REFERENCES usuarios(id),
   FOREIGN KEY(jogo_id) REFERENCES jogos(id)
 );

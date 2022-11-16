@@ -7,6 +7,7 @@ const JogoController = require('./app/controllers/JogoController');
 const FaseController = require('./app/controllers/FaseController');
 const AuthController = require('./app/controllers/AuthController');
 const isAuthenticated = require('./app/middlewares/isAuthenticated');
+const PalpiteController = require('./app/controllers/PalpiteController');
 
 const router = Router();
 
@@ -29,6 +30,9 @@ router.put('/campeonatos/:id', isAuthenticated, CampeonatoController.update);
 
 router.get('/jogos', isAuthenticated, JogoController.index);
 router.post('/jogos', isAuthenticated, JogoController.store);
+
+router.get('/palpites', isAuthenticated, PalpiteController.index);
+router.post('/palpites', isAuthenticated, PalpiteController.store);
 
 router.get('/fases', isAuthenticated, FaseController.index);
 

@@ -21,7 +21,7 @@ class AuthController {
 
     const access_token = jwt.sign({ ...usuario, }, authConfig.jwt.secretKey, { expiresIn: authConfig.jwt.expiresIn, });
     delete usuario.senha;
-    return response.status(200).json({ access_token, usuario });
+    return response.status(200).json({ access_token, user: usuario });
 
   }
 }
