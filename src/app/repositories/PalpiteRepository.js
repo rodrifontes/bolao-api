@@ -12,15 +12,15 @@ class PalpiteRepository {
         j.visitante_id, v.nome AS visitante_nome,  v.nome_reduzido AS visitante_nome_reduzido, v.path_escudo AS visitante_path_escudo,
         j.data,
         j.local,
-      j.gols_mandante,
-      j.gols_visitante,
-      p.placar_mandante AS palpite_placar_mandante,
-      p.placar_visitante AS palpite_placar_visitante
-        FROM jogos j
-        INNER JOIN campeonatos c ON j.campeonato_id = c.id
-        INNER JOIN fases f ON j.fase_id = f.id
-        INNER JOIN times m ON j.mandante_id = m.id
-        INNER JOIN times v ON j.visitante_id = v.id
+        j.gols_mandante,
+        j.gols_visitante,
+        p.placar_mandante AS palpite_placar_mandante,
+        p.placar_visitante AS palpite_placar_visitante
+      FROM jogos j
+      INNER JOIN campeonatos c ON j.campeonato_id = c.id
+      INNER JOIN fases f ON j.fase_id = f.id
+      INNER JOIN times m ON j.mandante_id = m.id
+      INNER JOIN times v ON j.visitante_id = v.id
       LEFT JOIN palpites p ON j.id = p.jogo_id AND p.usuario_id = ${userId}
       ORDER BY j.data ${direction}
     `);

@@ -12,12 +12,12 @@ class JogoController {
     const { id } = request.params;
 
     if (!isValidUUID(id)) {
-      return response.status(400).json({ error: 'Invalid time id' });
+      return response.status(400).json({ error: 'Id do time inválido' });
     }
 
-    const time = await JogoRepository.findByID(id);
-    if (!time) {
-      return response.status(404).json({ error: 'Time not found' });
+    const jogo = await JogoRepository.findByID(id);
+    if (!jogo) {
+      return response.status(404).json({ error: 'Jogo não encontrado' });
     }
 
     response.json(time);
@@ -28,31 +28,31 @@ class JogoController {
       mandante_id, visitante_id, campeonato_id, fase_id, data, local,
     } = request.body;
 
-    if (!mandante_id) return response.status(400).json({ error: 'Time mandante is required' });
+    if (!mandante_id) return response.status(400).json({ error: 'Time mandante é obrigatório' });
 
     if (mandante_id && !isValidUUID(mandante_id)) {
-      return response.status(400).json({ error: 'Invalid time mandante' });
+      return response.status(400).json({ error: 'Inválido time mandante' });
     }
 
-    if (!visitante_id) return response.status(400).json({ error: 'Time visitante is required' });
+    if (!visitante_id) return response.status(400).json({ error: 'Time visitante é obrigatório' });
 
     if (visitante_id && !isValidUUID(visitante_id)) {
-      return response.status(400).json({ error: 'Invalid time visitante' });
+      return response.status(400).json({ error: 'Time visitante inválido' });
     }
 
-    if (!campeonato_id) return response.status(400).json({ error: 'Campeonato is required' });
+    if (!campeonato_id) return response.status(400).json({ error: 'Campeonato é obrigatório' });
 
     if (campeonato_id && !isValidUUID(campeonato_id)) {
-      return response.status(400).json({ error: 'Invalid campeonato' });
+      return response.status(400).json({ error: 'Campronato inválido' });
     }
 
-    if (!fase_id) return response.status(400).json({ error: 'Fase is required' });
+    if (!fase_id) return response.status(400).json({ error: 'Fase é obrigatória' });
 
     if (fase_id && !isValidUUID(fase_id)) {
-      return response.status(400).json({ error: 'Invalid fase' });
+      return response.status(400).json({ error: 'Fase inválida' });
     }
 
-    if (!data) return response.status(400).json({ error: 'Data is required' });
+    if (!data) return response.status(400).json({ error: 'Data é obrigatória' });
 
     const time = await JogoRepository.create({
       mandante_id,
@@ -66,40 +66,45 @@ class JogoController {
     response.status(201).json(time);
   }
 
-  async update(request, response) {
+  async updateResultado(request, response) {
     const { id } = request.params;
 
     const {
-      nome, nome_reduzido, path_escudo,
+      gols_mandante, gols_visitante,
     } = request.body;
 
     if (!isValidUUID(id)) {
-      return response.status(400).json({ error: 'Invalid time id' });
+      return response.status(400).json({ error: 'Id Jogo Invalido' });
     }
 
-    if (!nome) return response.status(400).json({ error: 'Nome is required' });
+    if (!gols_mandante) {
+      return response.status(400).json({
+        error: 'Número de Gols do Mandante é Obrigatório'
+      });
+    }
 
-    if (!nome_reduzido) return response.status(400).json({ error: 'Nome reduzido is required' });
+    if (!gols_visitante) {
+      return response.status(400).json({
+        error: 'Número de Gols do Visitante é Obrigatório'
+      });
+    }
 
-    if (!path_escudo) return response.status(400).json({ error: 'Path do escudo is required' });
+    const jogoExists = await JogoRepository.findByID(id);
+    if (!jogoExists) return response.status(404).json({ error: 'Jogo não encontrado' });
 
-    const timeExists = await TimeRepository.findByID(id);
-    if (!timeExists) return response.status(404).json({ error: 'Time not found' });
-
-    const time = await JogoRepository.update(id, {
-      nome,
-      nome_reduzido,
-      path_escudo,
+    const jogo = await JogoRepository.updateResultado(id, {
+      gols_mandante,
+      gols_visitante,
     });
 
-    response.json(time);
+    response.json(jogo);
   }
 
   async delete(request, response) {
     const { id } = request.params;
 
     if (!isValidUUID(id)) {
-      return response.status(400).json({ error: 'Invalid jogo id' });
+      return response.status(400).json({ error: 'Id jogo inválido' });
     }
     await JogoRepository.delete(id);
 

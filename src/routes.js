@@ -30,6 +30,7 @@ router.put('/campeonatos/:id', isAuthenticated, CampeonatoController.update);
 
 router.get('/jogos', isAuthenticated, JogoController.index);
 router.post('/jogos', isAuthenticated, JogoController.store);
+router.put('/jogos/resultado/:id', isAuthenticated, JogoController.updateResultado);
 
 router.get('/palpites', isAuthenticated, PalpiteController.index);
 router.post('/palpites', isAuthenticated, PalpiteController.store);

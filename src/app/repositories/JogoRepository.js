@@ -5,13 +5,15 @@ class JogoRepository {
     const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     const rows = await db.query(`
       SELECT
-      j.id,
-      j.campeonato_id, c.nome AS campeonato_nome,
-      j.fase_id, f.nome AS fase_nome,
-      j.mandante_id, m.nome AS mandante_nome, m.nome_reduzido AS mandante_nome_reduzido, m.path_escudo AS mandante_path_escudo,
-      j.visitante_id, v.nome AS visitante_nome,  v.nome_reduzido AS visitante_nome_reduzido, v.path_escudo AS visitante_path_escudo,
-      data,
-      local
+        j.id,
+        j.campeonato_id, c.nome AS campeonato_nome,
+        j.fase_id, f.nome AS fase_nome,
+        j.mandante_id, m.nome AS mandante_nome, m.nome_reduzido AS mandante_nome_reduzido, m.path_escudo AS mandante_path_escudo,
+        j.visitante_id, v.nome AS visitante_nome,  v.nome_reduzido AS visitante_nome_reduzido, v.path_escudo AS visitante_path_escudo,
+        data,
+        local,
+        j.gols_mandante,
+        j.gols_visitante
       FROM jogos j
       INNER JOIN campeonatos c ON j.campeonato_id = c.id
       INNER JOIN fases f ON j.fase_id = f.id
@@ -63,6 +65,19 @@ class JogoRepository {
       WHERE id = $6
       RETURNING *;
     `, [mandante_id, visitante_id, campeonato_id, fase_id, data, local, id]);
+    return row;
+  }
+
+  async updateResultado(id, {
+    gols_mandante,
+    gols_visitante,
+  }) {
+    const [row] = await db.query(`
+      UPDATE JOGOS
+      SET gols_mandante = $1, gols_visitante = $2
+      WHERE id = $3
+      RETURNING *;
+    `, [gols_mandante, gols_visitante, id]);
     return row;
   }
 
