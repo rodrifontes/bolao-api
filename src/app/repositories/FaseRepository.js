@@ -6,8 +6,7 @@ class CampeonatoRepository {
     const rows = await db.query(`
       SELECT *
       FROM fases f
-      LEFT JOIN fases_campeonatos fc ON f.id = fc.id_fase
-      ORDER BY fc.ordem ${direction}, nome ${direction}
+      ORDER BY nome ${direction}
     `);
     return rows;
   }

@@ -64,12 +64,14 @@ INSERT INTO fases (id, nome) VALUES ('02ea8667-cda7-462f-a6fd-8bf71b0e37f0', 'Fi
 
 INSERT INTO campeonatos (id, nome) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', 'Copa do Mundo 2022');
 
+/*
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '281c35bc-5ee2-4252-a146-6b66a454eec2', 1);
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '3c9b24c9-a391-4ce0-8f3d-4c1c04c99f81', 2);
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '3cc59b2a-86ab-4bc7-b83d-51f6934ff953', 3);
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '7891ca93-5358-4f29-9536-c890cd6a87a3', 4);
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '46e9b1fa-ff7d-48d2-b812-e4e9c0a52cc9', 5);
 INSERT INTO fases_campeonatos (id_campeonato, id_fase, ordem) VALUES ('48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '02ea8667-cda7-462f-a6fd-8bf71b0e37f0', 6);
+*/
 
 INSERT INTO jogos (id, mandante_id, visitante_id, campeonato_id, fase_id, data, local) VALUES ('d865575e-f7af-4b4b-9306-06920c47a797', '8afb87dc-449d-464f-9ff4-433400673b77', '982d63e4-af19-4dad-ac76-659a4b91cd06', '48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '281c35bc-5ee2-4252-a146-6b66a454eec2', '2022-11-20 13:00:00', 'Al Bayt');
 INSERT INTO jogos (id, mandante_id, visitante_id, campeonato_id, fase_id, data, local) VALUES ('470891d1-4971-4ef4-ae5c-a5cdceea7ff4', 'b3815a7b-4bb7-4506-bb73-56a197eca985', '177686ba-d49c-4df5-9f79-b270c9a30384', '48e45a98-2fb2-47b8-9f2e-34aaea4df16a', '281c35bc-5ee2-4252-a146-6b66a454eec2', '2022-11-21 13:00:00', 'Al Thumama');

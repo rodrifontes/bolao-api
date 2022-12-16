@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS apostadores (
   FOREIGN KEY(bolao_id) REFERENCES boloes(id)
 );
 
+/*
 CREATE TABLE IF NOT EXISTS fases_campeonatos (
   id_campeonato UUID NOT NULL,
   id_fase UUID NOT NULL,
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS fases_campeonatos (
   FOREIGN KEY(id_campeonato) REFERENCES campeonatos(id),
   FOREIGN KEY(id_fase) REFERENCES fases(id)
 );
+*/
 
 CREATE TABLE IF NOT EXISTS jogos (
   id UUID NOT NULL UNIQUE DEFAULT UUID_generate_v4(),
@@ -69,7 +71,9 @@ CREATE TABLE IF NOT EXISTS jogos (
   gols_visitante INTEGER,
   FOREIGN KEY(mandante_id) REFERENCES times(id),
   FOREIGN KEY(visitante_id) REFERENCES times(id),
-  FOREIGN KEY(campeonato_id, fase_id) REFERENCES fases_campeonatos(id_campeonato, id_fase)
+  FOREIGN KEY(campeonato_id) REFERENCES campeonatos(id),
+  FOREIGN KEY(fase_id) REFERENCES fases(id),
+  --FOREIGN KEY(campeonato_id, fase_id) REFERENCES fases_campeonatos(id_campeonato, id_fase)
 );
 
 CREATE TABLE IF NOT EXISTS palpites (
